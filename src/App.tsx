@@ -167,7 +167,7 @@ export default function App() {
           </div>
           <p className="mono mt-auto text-right text-xs tracking-tight text-[#f5f5f5] opacity-70">
             <a
-              href="https://cermuel.vercel.app/"
+              href="https://cermuel.dev/"
               className="font-semibold underline"
               onClick={(e) => e.preventDefault()}
             >
