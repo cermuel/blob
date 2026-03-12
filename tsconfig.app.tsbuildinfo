@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/main.tsx"],"version":"5.9.3"}
+{"root":["./src/app.tsx","./src/main.tsx","./src/components/blob.tsx","./src/components/info.tsx","./src/components/login-button.tsx","./src/components/mobile-blocker.tsx","./src/constants/index.ts","./src/types/index.ts","./src/utils/helpers.ts"],"version":"5.9.3"}

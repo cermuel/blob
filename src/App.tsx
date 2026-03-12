@@ -54,7 +54,7 @@ export default function App() {
           </div>
         </section>
         <section className="grid  min-h-[58vh] place-items-center bg-black px-4 py-10 md:min-h-screen md:px-10">
-          <div className="w-full max-w-115">
+          <div className="w-full mt-auto max-w-115">
             <header className="mono mb-11 text-left">
               <h1 className="mb-2 text-xl font-bold leading-none tracking-[-0.05em] text-white md:text-[3.2rem]">
                 Welcome back!
