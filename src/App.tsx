@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import LoginButton from "./components/login-button";
 import Blob from "./components/blob";
-import { blobs } from "./constants";
 import InfoModal from "./components/info";
-import MobileBlock from "./components/mobile-blocker";
+import LoginButton from "./components/login-button";
+import { blobs } from "./constants";
 
 export default function App() {
   const [email, setEmail] = useState("");
@@ -34,12 +33,11 @@ export default function App() {
 
   return (
     <>
-      <MobileBlock />
       <InfoModal open={showInfo} onClose={() => setShowInfo(false)} />
-      <main className="min-h-screen bg-black text-white md:grid md:grid-cols-2">
-        <section className="relative min-h-[42vh] overflow-hidden border-b border-[#222] bg-[#111] md:min-h-screen md:border-b-0 md:border-r">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative w-full h-137.5 overflow-y-hidden">
+      <main className="min-h-screen bg-black text-white flex flex-col md:grid md:grid-cols-2">
+        <section className="relative h-[30vh] min-h-[240px] max-h-[280px] md:max-h-none md:h-auto md:min-h-screen overflow-hidden border-b border-[#222] bg-[#111] md:border-b-0 md:border-r">
+          <div className="absolute inset-x-0 bottom-[-5px] md:bottom-auto md:inset-0 flex items-end md:items-center justify-center overflow-hidden">
+            <div className="relative w-full h-137.5 scale-[0.4] origin-bottom md:scale-100 md:origin-center pointer-events-none md:pointer-events-auto">
               {blobs.map((spec) => (
                 <Blob
                   key={spec.kind}
@@ -53,10 +51,10 @@ export default function App() {
             </div>
           </div>
         </section>
-        <section className="grid  min-h-[58vh] place-items-center bg-black px-4 py-10 md:min-h-screen md:px-10">
-          <div className="w-full mt-auto max-w-115">
-            <header className="mono mb-11 text-left">
-              <h1 className="mb-2 text-xl font-bold leading-none tracking-[-0.05em] text-white md:text-[3.2rem]">
+        <section className="flex flex-1 flex-col justify-center items-center bg-black px-4 pt-4 pb-6 md:pt-10 md:py-10 md:px-10 overflow-y-auto">
+          <div className="w-full max-w-115">
+            <header className="mono mb-4 md:mb-11 text-left pt-2 md:pt-0">
+              <h1 className="mb-2 text-3xl font-bold leading-none tracking-[-0.05em] text-white md:text-[3.2rem]">
                 Welcome back!
               </h1>
               <p className="text-sm text-[#f5f5f5] opacity-70">
@@ -74,7 +72,7 @@ export default function App() {
               </button>
             </header>
             <form
-              className="mono flex flex-col gap-5"
+              className="mono flex flex-col gap-3 md:gap-5"
               autoComplete="off"
               onSubmit={(e) => {
                 e.preventDefault();
@@ -154,7 +152,7 @@ export default function App() {
                 onClick={handleSubmit}
               />
             </form>
-            <p className="mono mt-2 text-right text-xs tracking-tight text-[#f5f5f5] opacity-70">
+            <p className="mono mt-4 text-center md:text-right text-xs tracking-tight text-[#f5f5f5] opacity-70">
               Don&apos;t have an account?{" "}
               <a
                 href="#"
@@ -165,7 +163,7 @@ export default function App() {
               </a>
             </p>
           </div>
-          <p className="mono mt-auto text-right text-xs tracking-tight text-[#f5f5f5] opacity-70">
+          <p className="mono mt-4 md:mt-auto text-center md:text-right w-full text-xs tracking-tight text-[#f5f5f5] opacity-70">
             <a
               href="https://cermuel.dev"
               className="font-semibold underline"

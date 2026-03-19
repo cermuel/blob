@@ -20,6 +20,14 @@ function Blob({
   const ref = useRef<SVGSVGElement>(null);
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
   const [bouncing, setBouncing] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (!success) return;
@@ -42,28 +50,31 @@ function Blob({
   }, [focused]);
 
   const path = buildPath(spec, focused && !success, showPassword);
-  const faceDir = focused && !success ? (showPassword ? -1 : 1) : 0;
   const maxShift = spec.width * 0.18;
   const isNudgeOnly =
     spec.kind === "semicircle" || spec.kind === "topRoundRect";
 
-  const faceShiftX = Math.max(
-    -maxShift,
-    Math.min(
-      maxShift,
-      focused && !success
-        ? faceDir * (isNudgeOnly ? 6 : Math.min(18, maxShift))
-        : eyeOffset.x * 0.9,
-    ),
-  );
+  let faceXTarget = eyeOffset.x * 0.9;
+  let faceYTarget = isNudgeOnly ? 0 : eyeOffset.y * 0.7;
+  let groupX = 0;
+  let groupY = 0;
 
-  const faceShiftY = isNudgeOnly
-    ? 0
-    : focused && !success
-      ? showPassword
-        ? -8
-        : -28
-      : eyeOffset.y * 0.7;
+  if (focused && !success) {
+    if (showPassword) {
+      faceXTarget = isMobile ? -16 : -8;
+      faceYTarget = isNudgeOnly ? 0 : (isMobile ? -8 : -8);
+      groupX = isMobile ? -16 : -8;
+      groupY = isNudgeOnly ? 0 : (isMobile ? -8 : -8);
+    } else {
+      faceXTarget = isMobile ? 0 : (isNudgeOnly ? 6 : Math.min(18, maxShift));
+      faceYTarget = isNudgeOnly ? 0 : (isMobile ? 24 : -28);
+      groupX = isMobile ? 0 : (isNudgeOnly ? 40 : 22);
+      groupY = isNudgeOnly ? 0 : (isMobile ? 28 : -28);
+    }
+  }
+
+  const faceShiftX = Math.max(-maxShift, Math.min(maxShift, faceXTarget));
+  const faceShiftY = faceYTarget;
 
   const eyePad = spec.eyeRx + 4;
   const lx = Math.max(
@@ -110,8 +121,21 @@ function Blob({
         y: bounceY,
         opacity: 1,
         rotate:
-          !success && spec.kind === "topRoundRect" ? (focused ? 20 : 0) : 0,
-        x: !success && spec.kind === "topRoundRect" ? (focused ? 12 : 0) : 0,
+          !success && spec.kind === "topRoundRect"
+            ? focused
+              ? isMobile
+                ? 0
+                : 20
+              : 0
+            : 0,
+        x:
+          !success && spec.kind === "topRoundRect"
+            ? focused
+              ? isMobile
+                ? 0
+                : 12
+              : 0
+            : 0,
       }}
       transition={
         bouncing
@@ -137,24 +161,8 @@ function Blob({
       />
       <motion.g
         animate={{
-          x: isNudgeOnly
-            ? focused && !success && !showPassword
-              ? 40
-              : focused && !success && showPassword
-                ? -8
-                : 0
-            : focused && !success && !showPassword
-              ? 22
-              : focused && !success && showPassword
-                ? -8
-                : 0,
-          y: isNudgeOnly
-            ? 0
-            : focused && !success
-              ? showPassword
-                ? -8
-                : -28
-              : 0,
+          x: groupX,
+          y: groupY,
           rotate: invalid ? [0, -4, 4, -4, 4, 0] : 0,
         }}
         transition={{
