@@ -51,8 +51,8 @@ export default function App() {
             </div>
           </div>
         </section>
-        <section className="flex flex-1 flex-col justify-center items-center bg-black px-4 pt-4 pb-6 md:pt-10 md:py-10 md:px-10 overflow-y-auto">
-          <div className="w-full max-w-115">
+        <section className="flex flex-1 flex-col md:h-full justify-center items-center bg-black px-4 pt-4 pb-6 md:pt-10 md:py-10 md:px-10 overflow-y-auto">
+          <div className="w-full max-w-115 md:mt-auto">
             <header className="mono mb-4 md:mb-11 text-left pt-2 md:pt-0">
               <h1 className="mb-2 text-3xl font-bold leading-none tracking-[-0.05em] text-white md:text-[3.2rem]">
                 Welcome back!
@@ -163,7 +163,7 @@ export default function App() {
               </a>
             </p>
           </div>
-          <p className="mono mt-4 md:mt-auto text-center md:text-right w-full text-xs tracking-tight text-[#f5f5f5] opacity-70">
+          <p className="mono mt-4 md:mt-auto text-center w-full text-xs tracking-tight text-[#f5f5f5] opacity-70">
             <a
               href="https://cermuel.dev"
               className="font-semibold underline"
