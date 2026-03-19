@@ -34,9 +34,9 @@ export default function App() {
   return (
     <>
       <InfoModal open={showInfo} onClose={() => setShowInfo(false)} />
-      <main className="min-h-screen bg-black text-white flex flex-col md:grid md:grid-cols-2">
-        <section className="relative h-[30vh] min-h-[240px] max-h-[280px] md:max-h-none md:h-auto md:min-h-screen overflow-hidden border-b border-[#222] bg-[#111] md:border-b-0 md:border-r">
-          <div className="absolute inset-x-0 bottom-[-5px] md:bottom-auto md:inset-0 flex items-end md:items-center justify-center overflow-hidden">
+      <main className="h-dvh bg-black text-white flex flex-col md:items-center md:grid md:grid-cols-2">
+        <section className="relative h-[30vh] min-h-[240px] max-h-[280px] md:max-h-none md:h-dvh overflow-hidden border-b border-[#222] bg-[#111] md:border-b-0 md:border-r">
+          <div className="absolute inset-x-0 bottom-[-5px] md:bottom-auto md:h-full md:inset-0 flex items-end md:items-center justify-center overflow-hidden">
             <div className="relative w-full h-137.5 scale-[0.4] origin-bottom md:scale-100 md:origin-center pointer-events-none md:pointer-events-auto">
               {blobs.map((spec) => (
                 <Blob
